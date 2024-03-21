@@ -16,6 +16,7 @@ def import_files():
             points = [row for row in reader]
             times = [int(row[0]) for row in points]
         except:
+            points = []
             times = []
 
     original_length = len(times)
