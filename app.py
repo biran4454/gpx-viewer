@@ -16,15 +16,15 @@ def map_view():
         return render_template('nomap.html')
 
 @app.route('/scan', methods=['POST'])
-def scan():
-    main.main()
+async def scan():
+    await main.main()
     return 'OK'
 
 @app.route('/regen', methods=['POST'])
-def regen():
+async def regen():
     main.delete_map()
     main.clear_cache()
-    main.main()
+    await main.main()
     return 'OK'
 
 @app.route('/upload', methods=['GET', 'POST'])
