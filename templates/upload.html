@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Upload{% endblock %}
+
+{% block content %}
+    <div class="upload">
+        <br>
+        <h2>Upload your GPX files</h2>
+        <br>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input class="form-control form-control-lg" type="file" name="files" accept=".gpx" multiple required><br>
+            <input class="btn btn-primary" type="submit" value="Upload">
+        </form>
+    </div>
+{% endblock %}

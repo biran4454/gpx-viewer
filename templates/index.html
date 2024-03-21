@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Map{% endblock %}
+{% block content %}
+    <a target="_blank" href="{{ url_for('map_view') }}" class="btn btn-primary">Open in new tab</a>
+    <button class="btn btn-primary" id="scan">Scan</button>
+    <button class="btn btn-danger" id="regen">Regenerate</button>
+    <div class="map_embed">
+        <iframe src="{{ url_for('map_view') }}" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        document.getElementById('scan').addEventListener('click', function() {
+            fetch('{{ url_for("scan") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            }).then(function(response) {
+                if (response.ok) {
+                    alert('Scan completed.');
+                    return response.json();
+                } else {
+                    alert('Scan failed.');
+                }
+                throw new Error('Request failed.');
+            });
+        });
+        document.getElementById('regen').addEventListener('click', function() {
+            fetch('{{ url_for("regen") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            }).then(function(response) {
+                if (response.ok) {
+                    alert('Regeneration completed.')
+                    return response.json();
+                } else {
+                    alert('Regeneration failed.');
+                }
+                throw new Error('Request failed.');
+            });
+        });
+    </script>
+{% endblock %}

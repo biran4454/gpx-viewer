@@ -50,3 +50,9 @@ def import_files():
     with open('output/completed.txt', 'a') as f:
         for file in done:
             f.write(file + '\n')
+
+def clear_cache():
+    with open('output/locations.csv', 'w') as f:
+        f.write('')
+    with open('output/completed.txt', 'w') as f:
+        f.write('')

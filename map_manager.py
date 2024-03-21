@@ -37,7 +37,9 @@ def create_map(paths):
     return m
 
 def full_map():
+    print('Loading points...')
     points = load_points()
     paths = create_paths(points)
     m = create_map(paths)
-    m.save('output/map.html')
+    m.save('templates/map.html')
+    print('Map saved')
