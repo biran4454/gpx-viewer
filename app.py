@@ -9,7 +9,10 @@ def index():
 
 @app.route('/map')
 def map_view():
-    return render_template('map.html')
+    try:
+        return render_template('map.html')
+    except:
+        return render_template('nomap.html')
 
 @app.route('/scan', methods=['POST'])
 def scan():
