@@ -1,5 +1,6 @@
 import folium
 import csv
+import os
 
 class Path:
     def __init__(self, points):
@@ -31,14 +32,24 @@ def create_paths(points):
     return paths
 
 def create_map(paths):
-    m = folium.Map(location=[paths[0].points[0][1], paths[0].points[0][2]], zoom_start=12)
+    m = folium.Map(location=[52.076024, -2.401188], zoom_start=7)
     for path in paths:
         folium.PolyLine(path.coords, color='blue', weight=2.5, opacity=1).add_to(m)
     return m
 
+def delete_map():
+    try:
+        os.remove('templates/map.html')
+        print('Map deleted')
+    except:
+        print('No map to delete')
+
 def full_map():
     print('Loading points...')
     points = load_points()
+    if not points:
+        print('No points')
+        return
     paths = create_paths(points)
     m = create_map(paths)
     m.save('templates/map.html')

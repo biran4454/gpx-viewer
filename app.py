@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import main
+import os
 
 app = Flask(__name__)
 
@@ -16,19 +17,14 @@ def map_view():
 
 @app.route('/scan', methods=['POST'])
 def scan():
-    try:
-        main.main()
-    except:
-        return 'Error', 500
+    main.main()
     return 'OK'
 
 @app.route('/regen', methods=['POST'])
 def regen():
-    try:
-        main.clear_cache()
-        main.main()
-    except:
-        return 'Error', 500
+    main.delete_map()
+    main.clear_cache()
+    main.main()
     return 'OK'
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -36,6 +32,8 @@ def upload():
     if request.method == 'POST':
         files = request.files.getlist('files')
         for file in files:
+            if not os.path.exists('data/GPX'):
+                os.makedirs('data/GPX')
             file.save(f'data/GPX/{file.filename}')
         return render_template('success.html')
     return render_template('upload.html')

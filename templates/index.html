@@ -18,7 +18,7 @@
                 body: JSON.stringify({})
             }).then(function(response) {
                 if (response.ok) {
-                    alert('Scan completed.');
+                    location.reload();
                     return response.json();
                 } else {
                     alert('Scan failed.');
@@ -35,7 +35,8 @@
                 body: JSON.stringify({})
             }).then(function(response) {
                 if (response.ok) {
-                    alert('Regeneration completed.')
+                    alert('Regeneration completed.');
+                    location.reload();
                     return response.json();
                 } else {
                     alert('Regeneration failed.');

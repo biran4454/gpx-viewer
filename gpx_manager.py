@@ -9,6 +9,17 @@ def load_gpx_file(name, path='data/'):
     return gpx
 
 def import_files():
+    if not os.path.exists('output'):
+        os.makedirs('output')
+    if not os.path.isfile('output/locations.csv'):
+        with open('output/locations.csv', 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['timeunix', 'latitude', 'longitude'])
+    
+    if not os.path.isfile('output/completed.txt'):
+        with open('output/completed.txt', 'w') as f:
+            f.write('')
+    
     with open('output/locations.csv', 'r') as f:
         reader = csv.reader(f)
         try:
@@ -21,11 +32,8 @@ def import_files():
 
     original_length = len(times)
     
-    try:
-        with open('output/completed.txt', 'r') as f:
-            completed = f.read().splitlines()
-    except:
-        completed = []
+    with open('output/completed.txt', 'r') as f:
+        completed = f.read().splitlines()
     
     done = []
     for file in os.listdir('data/GPX'):

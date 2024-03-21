@@ -7,3 +7,6 @@ def main():
 
 def clear_cache():
     gpx_manager.clear_cache()
+
+def delete_map():
+    map_manager.delete_map()
